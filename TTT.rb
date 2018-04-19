@@ -154,11 +154,6 @@ class Game
     puts "-------------"
     puts "  7 | 8 | 9 "
     puts
-    puts "Si vous essayez de mettre un pion"
-    puts "où il y en a déjà un cela"
-    puts "vous fera sauter votre tour."
-    puts "Soyez prudent(e) !"
-    puts
     puts "====================================="
     puts "     Vous êtes chaud ??     "
     puts "C'est parti pour Tic Tac Toe !"
@@ -178,19 +173,13 @@ class Game
       puts "===================TOUR #{(turns + 1)}==================="
       puts "Où veux tu placer ton piont #{player.name} ? (0 - 9)"
       place = gets.chomp.to_i
-        while place == 0 # Si le joueur rentre un string, le to_i met ce string à une valeur de 0 par défaut. n fait une boucle pour qu'il rentre un integer.
-          puts
-          puts "Vous n'avez pas renseigné un chiffre de 1 à 9"
-          puts "Où veux tu placer ton piont #{player.name} ? (0 - 9)"
-          place = gets.chomp.to_i
-      
+
           while @board.est_dispo?(place) == false # Si la place est déjà occupé on relance la demande.
             puts                                  # ce while est dans le précéden au cas ou le joueur veut rentrer autre chose qu'un Integer.
             puts "La position renseigné est déjà occupée"
             puts "Veuillez en choisir une nouvelle"
             place = gets.chomp.to_i
           end
-        end
 
       @info_player = [player, player.value_player, place]
       @board.play(@info_player) # le @info_player est l'array que l'on envoie dans la méthode play de la Class Board.
