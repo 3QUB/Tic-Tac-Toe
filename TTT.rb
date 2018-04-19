@@ -50,7 +50,7 @@ class Board
   def play(array)
     # array a cette forme : [x, x.value_player, place]
     k = array[2] # L'index 2 la place entre 1 et 9 que le joueur a indiqué.
-    if board[(k-1)].value = " " # On vérifie si la place indiqué par le joueur est bien vide. Sinon ca saute son tour.
+    #if board[(k-1)].value = " " # On vérifie si la place indiqué par le joueur est bien vide. Sinon ca saute son tour.
       case
       when array[1] == "X" # On regarde qu'elle est la couleur du pion du jour, ca correspond à l'index 1 de array.
         @board[(k-1)].value = "X" # L'index d'un array commence à 0, donc on soustrait 1 à k pour que ca colle. Et on change la valeur du BoardCase.
@@ -58,10 +58,19 @@ class Board
         @board[(k-1)].value = "O"
       else
       end
+    #end
+  end
+
+  def est_dispo?(place)
+    # Tant que la valeur de la place indiqué n'est pas un espace, on retourne false
+    unless @board[(place-1)].value == " "
+      return false
+    else
+      return true
     end
   end
 
-  def victory
+  def victory?
         # Pour qu'un joueur gagne il faut qu'il y est 3 valeurs identiques (X ou O) dans certaines cases.
         # Il ne faut pas que la case soit vide aussi (c'est notre valeur par défaut).
     case
@@ -144,7 +153,6 @@ class Game
     puts "  4 | 5 | 6 "
     puts "-------------"
     puts "  7 | 8 | 9 "
-    sleep 2
     puts
     puts "Si vous essayez de mettre un pion"
     puts "où il y en a déjà un cela"
@@ -175,11 +183,19 @@ class Game
           puts "Vous n'avez pas renseigné un chiffre de 1 à 9"
           puts "Où veux tu placer ton piont #{player.name} ? (0 - 9)"
           place = gets.chomp.to_i
+      
+          while @board.est_dispo?(place) == false # Si la place est déjà occupé on relance la demande.
+            puts                                  # ce while est dans le précéden au cas ou le joueur veut rentrer autre chose qu'un Integer.
+            puts "La position renseigné est déjà occupée"
+            puts "Veuillez en choisir une nouvelle"
+            place = gets.chomp.to_i
+          end
         end
+
       @info_player = [player, player.value_player, place]
       @board.play(@info_player) # le @info_player est l'array que l'on envoie dans la méthode play de la Class Board.
 
-        if @board.victory # A chaque tour on vérifie si le joueur a gagné
+        if @board.victory? # A chaque tour on vérifie si le joueur a gagné
           puts
           puts "============================================="
           puts "          Tu as gagné #{player.name}         "
@@ -199,7 +215,7 @@ class Game
 
       }
 
-        if @board.victory # on vérifie une nouvelle fois si il y a victoire
+        if @board.victory? # on vérifie une nouvelle fois si il y a victoire
           @board.display_board
           puts "============================================="
           puts "                 !! VICTORY !!               "
