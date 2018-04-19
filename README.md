@@ -7,7 +7,7 @@ Ceci est un programme de Morpion, ou Tic Tac Toe.
 ### Objectifs du programme :
 Travailler la POO en manipulant des Class en ruby.
 
-###Les règles du programme :
+### Les règles du programme :
 - le programme est à deux joueurs only (pas d'intelligence artificielle)
 - le programme doit commencer en demandant le prénom des joueurs
 - le programme doit afficher le plateau chaque tour (dans le terminal), puis demander au joueur auquel c'est le tour où ce dernier compte jouer
