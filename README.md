@@ -18,13 +18,6 @@ Travailler la POO en manipulant des Class en ruby.
 
 Télécharger le fichier, puis lancer `ruby TTT.rb`
 
-### Limite du programme
-- Si un joueur entre autre chose qu'un nombre entre 1 et 9, cela créé une erreur.
-- Si le joueur rentre un string, cela met une valeur dans la case 9
-Update : J'ai la solution aux 2 problèmes, mais j'ai un conflit avec un autre filtre qui empeche de jouer 2 fois sur la même case.
-J'ai préféré garder le filtre de si on joue sur la même case.
-
-
 ## Pré-requis
 
 Projet libre de droit et d'accès à la lecture/écriture. 
