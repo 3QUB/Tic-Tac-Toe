@@ -174,12 +174,22 @@ class Game
       puts "Où veux tu placer ton piont #{player.name} ? (0 - 9)"
       place = gets.chomp.to_i
 
-          while @board.est_dispo?(place) == false # Si la place est déjà occupé on relance la demande.
-            puts                                  # ce while est dans le précéden au cas ou le joueur veut rentrer autre chose qu'un Integer.
-            puts "La position renseigné est déjà occupée"
-            puts "Veuillez en choisir une nouvelle"
-            place = gets.chomp.to_i
-          end
+        # while @board.est_dispo?(place) == false # Si la place est déjà occupé on relance la demande.
+        #   puts                                  # ce while est dans le précédent au cas ou le joueur veut rentrer autre chose qu'un Integer.
+        #   puts "La position renseigné est déjà occupée"
+        #   puts "Veuillez en choisir une nouvelle"
+        #   place = gets.chomp.to_i
+        # end
+        until place > 0 && place < 10 && @board.est_dispo?(place)
+
+        #while @board.est_dispo?(place) == false # Si la place est déjà occupé on relance la demande.
+          puts                                  # ce while est dans le précédent au cas ou le joueur veut rentrer autre chose qu'un Integer.
+          puts "Veuillez renseigné un bon numéro"
+          puts "Choisissez en un nouveau :"
+          place = gets.chomp.to_i
+        end
+
+        
 
       @info_player = [player, player.value_player, place]
       @board.play(@info_player) # le @info_player est l'array que l'on envoie dans la méthode play de la Class Board.
@@ -199,6 +209,15 @@ class Game
         puts "============================================="
         puts "            C'est une égalité :(             "
         puts "============================================="
+        puts
+        puts
+        puts "Voulez vous faire une nouvelle partie? (Y or N)"
+        answer = gets.chomp
+        if answer == "Y"
+          Game.new.go
+        else
+          puts "Au revoir!"
+        end
         break
       end
 
@@ -209,7 +228,16 @@ class Game
           puts "============================================="
           puts "                 !! VICTORY !!               "
           puts "============================================="
-          break # Si c'est le cas on sort de la boucle while
+          puts
+          puts
+          puts "Voulez vous faire une nouvelle partie? (Y or N)"
+          answer = gets.chomp
+          if answer == "Y"
+            Game.new.go
+          else
+            puts "Au revoir!"
+          break
+          end # Si c'est le cas on sort de la boucle while
         end
 
     end
